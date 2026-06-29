@@ -1,113 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8" />
 <title>Rave Pedagogy Framework</title>
+
 <style>
-  body {
-  margin: 0;
-  min-height: 100vh;
-  background-image: url("assets/flyer-background.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  font-family: Arial, Helvetica, sans-serif;
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background-image: url("assets/flyer-background.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #f4f1ee;
+
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
 }
-  
+
+/* ---------- FRAMEWORK ---------- */
+
 .framework-image {
-  width: min(70vw, 700px);
-  height: auto;
-  display: block;
-  margin: 120px auto 30px auto;
+    width: min(58vw, 620px);
+    height: auto;
+
+    display: block;
+    margin: 260px auto 0 auto;
+
+    opacity: 0;
+    transition: opacity 2s ease;
 }
-  
-  svg {
-    width: 100vw;
-    height: 100vh;
-  }
 
-  text {
-    fill: #000;
-    text-anchor: middle;
-  }
+.framework-image.visible {
+    opacity: 1;
+}
 
-  .title {
-    font-size: 28px;
-    font-weight: 800;
-    letter-spacing: 1px;
-  }
-
-  .principle {
-    font-size: 20px;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-
-  .small {
-    font-size: 13px;
-  }
-
-  .center-circle {
-    fill: none;
-    stroke: #000;
-    stroke-width: 3;
-    animation: breathe 4s ease-in-out infinite;
-    transform-origin: 500px 380px;
-  }
-
-  .outer-circle {
-    fill: none;
-    stroke: #000;
-    stroke-width: 2;
-    stroke-dasharray: 6 8;
-  }
-
-  .dot {
-    fill: #000;
-    animation: dance 2.5s ease-in-out infinite alternate;
-  }
-
-  .dot:nth-of-type(odd) {
-    animation-duration: 2.1s;
-  }
-
-  .dot:nth-of-type(even) {
-    animation-duration: 3.2s;
-  }
-
-  @keyframes breathe {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.025); }
-  }
-
-  @keyframes dance {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(5px, -4px); }
-  }
+/* ---------- BUTTON ---------- */
 
 #enterButton {
-    display: block;
-    margin: 30px auto;
-    padding: 14px 28px;
 
-    background: black;
-    color: white;
+    position: fixed;
+
+    left: 50%;
+    bottom: 70px;
+
+    transform: translateX(-50%);
+
+    padding: 16px 32px;
+
+    background: #000;
+    color: #fff;
 
     border: none;
+
     cursor: pointer;
 
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     letter-spacing: 2px;
+
+    z-index: 100;
 }
 
 #enterButton:hover {
     background: #333;
 }
-</style>
-</head>
 
-<body>
+/* ---------- OLD SVG STYLES (we'll delete these later) ---------- */
+
+svg {
+    width: 100vw;
+    height: 100vh;
+}
+
+text {
+    fill: #000;
+    text-anchor: middle;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.principle {
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.small {
+    font-size: 13px;
+}
+
+.center-circle {
+    fill: none;
+    stroke: #000;
+    stroke-width: 3;
+    animation: breathe 4s ease-in-out infinite;
+    transform-origin: 500px 380px;
+}
+
+.outer-circle {
+    fill: none;
+    stroke: #000;
+    stroke-width: 2;
+    stroke-dasharray: 6 8;
+}
+
+.dot {
+    fill: #000;
+    animation: dance 2.5s ease-in-out infinite alternate;
+}
+
+.dot:nth-of-type(odd) {
+    animation-duration: 2.1s;
+}
+
+.dot:nth-of-type(even) {
+    animation-duration: 3.2s;
+}
+
+@keyframes breathe {
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.025);
+    }
+}
+
+@keyframes dance {
+    0% {
+        transform: translate(0,0);
+    }
+
+    100% {
+        transform: translate(5px,-4px);
+    }
+}
+
+</style>
+
+</head>
 
 <body>
 
@@ -116,10 +156,9 @@
 </audio>
 
 <img
-  class="framework-image"
-  src="assets/Rave_Pedagogy_Framework_Static.svg"
-  alt="Static Rave Pedagogy framework"
-/>
+    class="framework-image"
+    src="assets/Rave_Pedagogy_Framework_Static.svg"
+    alt="Rave Pedagogy Framework">
 
 <button id="enterButton">
     ▶ ENTER THE TALZ
