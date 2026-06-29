@@ -7,22 +7,34 @@
 <style>
 body {
   margin: 0;
-  min-height: 100vh;
-  background-image: url("assets/flyer-background.png");
-  background-size: contain;
-  background-position: top center;
-  background-repeat: no-repeat;
-  background-color: #f4f1ee;
+  background: #f4f1ee;
   font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+}
+
+.stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.flyer-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .framework-image {
-  width: min(54vw, 560px);
-  height: auto;
-  display: block;
-  margin: 300px auto 0 auto;
+  position: absolute;
+  left: 50%;
+  top: 53%;
+  transform: translate(-50%, -50%);
+  width: min(42vw, 500px);
   opacity: 0;
   transition: opacity 2s ease;
+  z-index: 2;
 }
 
 .framework-image.visible {
@@ -30,19 +42,19 @@ body {
 }
 
 #enterButton {
-  position: fixed;
+  position: absolute;
   left: 50%;
-  bottom: 45px;
-  transform: translateX(-50%);
-  padding: 16px 32px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 22px 44px;
   background: #000;
   color: #fff;
-  border: none;
+  border: 3px solid #fff;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 34px;
   font-weight: bold;
-  letter-spacing: 2px;
-  z-index: 100;
+  letter-spacing: 3px;
+  z-index: 3;
 }
 
 #enterButton:hover {
@@ -57,14 +69,16 @@ body {
   <source src="assets/lock_up_loop.mp3" type="audio/mpeg">
 </audio>
 
-<img
-  class="framework-image"
-  src="assets/Rave_Pedagogy_Framework_Static.svg"
-  alt="Rave Pedagogy Framework">
+<div class="stage">
+  <img class="flyer-bg" src="assets/flyer-background.png" alt="Rave flyer background">
 
-<button id="enterButton">
-  ▶ ENTER THE TALZ
-</button>
+  <img
+    class="framework-image"
+    src="assets/Rave_Pedagogy_Framework_Static.svg"
+    alt="Rave Pedagogy Framework">
+
+  <button id="enterButton">ENTER THE TALZ</button>
+</div>
 
 <script>
 const button = document.getElementById("enterButton");
