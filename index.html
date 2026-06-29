@@ -121,5 +121,33 @@
     ▶ ENTER THE TALZ
 </button>
 
+<script>
+  const button = document.getElementById("enterButton");
+  const music = document.getElementById("music");
+
+  button.addEventListener("click", () => {
+    music.volume = 0;
+    music.play();
+
+    let volume = 0;
+    const fadeIn = setInterval(() => {
+      if (volume < 0.7) {
+        volume += 0.05;
+        music.volume = volume;
+      } else {
+        clearInterval(fadeIn);
+      }
+    }, 250);
+
+    button.textContent = "SESSION STARTED";
+    button.style.opacity = "0";
+    button.style.transition = "opacity 1s ease";
+
+    setTimeout(() => {
+      button.style.display = "none";
+    }, 1000);
+  });
+</script>
+  
 </body>
 </html>
