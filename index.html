@@ -1,196 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8" />
 <title>Rave Pedagogy Framework</title>
 
 <style>
-
 body {
-    margin: 0;
-    min-height: 100vh;
-
-    background-image: url("assets/flyer-background.png");
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: #f4f1ee;
-
-    font-family: Arial, Helvetica, sans-serif;
-    overflow: hidden;
+  margin: 0;
+  min-height: 100vh;
+  background-image: url("assets/flyer-background.png");
+  background-size: contain;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-color: #f4f1ee;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ---------- FRAMEWORK ---------- */
-
 .framework-image {
-    width: min(58vw, 620px);
-    height: auto;
-
-    display: block;
-    margin: 260px auto 0 auto;
-
-    opacity: 0;
-    transition: opacity 2s ease;
+  width: min(54vw, 560px);
+  height: auto;
+  display: block;
+  margin: 300px auto 0 auto;
+  opacity: 0;
+  transition: opacity 2s ease;
 }
 
 .framework-image.visible {
-    opacity: 1;
+  opacity: 1;
 }
 
-/* ---------- BUTTON ---------- */
-
 #enterButton {
-
-    position: fixed;
-
-    left: 50%;
-    bottom: 70px;
-
-    transform: translateX(-50%);
-
-    padding: 16px 32px;
-
-    background: #000;
-    color: #fff;
-
-    border: none;
-
-    cursor: pointer;
-
-    font-size: 20px;
-    font-weight: bold;
-    letter-spacing: 2px;
-
-    z-index: 100;
+  position: fixed;
+  left: 50%;
+  bottom: 45px;
+  transform: translateX(-50%);
+  padding: 16px 32px;
+  background: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  z-index: 100;
 }
 
 #enterButton:hover {
-    background: #333;
+  background: #333;
 }
-
-/* ---------- OLD SVG STYLES (we'll delete these later) ---------- */
-
-svg {
-    width: 100vw;
-    height: 100vh;
-}
-
-text {
-    fill: #000;
-    text-anchor: middle;
-}
-
-.title {
-    font-size: 28px;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-
-.principle {
-    font-size: 20px;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.small {
-    font-size: 13px;
-}
-
-.center-circle {
-    fill: none;
-    stroke: #000;
-    stroke-width: 3;
-    animation: breathe 4s ease-in-out infinite;
-    transform-origin: 500px 380px;
-}
-
-.outer-circle {
-    fill: none;
-    stroke: #000;
-    stroke-width: 2;
-    stroke-dasharray: 6 8;
-}
-
-.dot {
-    fill: #000;
-    animation: dance 2.5s ease-in-out infinite alternate;
-}
-
-.dot:nth-of-type(odd) {
-    animation-duration: 2.1s;
-}
-
-.dot:nth-of-type(even) {
-    animation-duration: 3.2s;
-}
-
-@keyframes breathe {
-    0%,100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.025);
-    }
-}
-
-@keyframes dance {
-    0% {
-        transform: translate(0,0);
-    }
-
-    100% {
-        transform: translate(5px,-4px);
-    }
-}
-
 </style>
-
 </head>
 
 <body>
 
 <audio id="music" loop>
-    <source src="assets/lock_up_loop.mp3" type="audio/mpeg">
+  <source src="assets/lock_up_loop.mp3" type="audio/mpeg">
 </audio>
 
 <img
-    class="framework-image"
-    src="assets/Rave_Pedagogy_Framework_Static.svg"
-    alt="Rave Pedagogy Framework">
+  class="framework-image"
+  src="assets/Rave_Pedagogy_Framework_Static.svg"
+  alt="Rave Pedagogy Framework">
 
 <button id="enterButton">
-    ▶ ENTER THE TALZ
+  ▶ ENTER THE TALZ
 </button>
 
 <script>
-  const button = document.getElementById("enterButton");
-  const music = document.getElementById("music");
+const button = document.getElementById("enterButton");
+const music = document.getElementById("music");
+const framework = document.querySelector(".framework-image");
 
-  button.addEventListener("click", () => {
-    music.volume = 0;
-    music.play();
+button.addEventListener("click", () => {
+  framework.classList.add("visible");
 
-    let volume = 0;
-    const fadeIn = setInterval(() => {
-      if (volume < 0.7) {
-        volume += 0.05;
-        music.volume = volume;
-      } else {
-        clearInterval(fadeIn);
-      }
-    }, 250);
+  music.volume = 0;
+  music.play();
 
-    button.textContent = "SESSION STARTED";
-    button.style.opacity = "0";
-    button.style.transition = "opacity 1s ease";
+  let volume = 0;
+  const fadeIn = setInterval(() => {
+    if (volume < 0.7) {
+      volume += 0.05;
+      music.volume = volume;
+    } else {
+      clearInterval(fadeIn);
+    }
+  }, 250);
 
-    setTimeout(() => {
-      button.style.display = "none";
-    }, 1000);
-  });
+  button.style.opacity = "0";
+  button.style.transition = "opacity 1s ease";
+
+  setTimeout(() => {
+    button.style.display = "none";
+  }, 1000);
+});
 </script>
-  
+
 </body>
 </html>
