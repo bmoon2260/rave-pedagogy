@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Rave Pedagogy Framework</title>
+<style>
+  body {
+    margin: 0;
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  svg {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  text {
+    fill: #000;
+    text-anchor: middle;
+  }
+
+  .title {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+
+  .principle {
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .small {
+    font-size: 13px;
+  }
+
+  .center-circle {
+    fill: none;
+    stroke: #000;
+    stroke-width: 3;
+    animation: breathe 4s ease-in-out infinite;
+    transform-origin: 500px 380px;
+  }
+
+  .outer-circle {
+    fill: none;
+    stroke: #000;
+    stroke-width: 2;
+    stroke-dasharray: 6 8;
+  }
+
+  .dot {
+    fill: #000;
+    animation: dance 2.5s ease-in-out infinite alternate;
+  }
+
+  .dot:nth-of-type(odd) {
+    animation-duration: 2.1s;
+  }
+
+  .dot:nth-of-type(even) {
+    animation-duration: 3.2s;
+  }
+
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.025); }
+  }
+
+  @keyframes dance {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(5px, -4px); }
+  }
+</style>
+</head>
+
+<body>
+
+<svg viewBox="0 0 1000 760" role="img" aria-label="Rave Pedagogy framework as a Temporary Autonomous Learning Zone">
+
+  <!-- Outer framework circle -->
+  <circle class="outer-circle" cx="500" cy="380" r="270" />
+
+  <!-- Center TALZ circle -->
+  <circle class="center-circle" cx="500" cy="380" r="170" />
+
+  <!-- Central text -->
+  <text x="500" y="315" class="title">
+    <tspan x="500" dy="0">TEMPORARY</tspan>
+    <tspan x="500" dy="34">AUTONOMOUS</tspan>
+    <tspan x="500" dy="34">LEARNING ZONE</tspan>
+  </text>
+
+  <text x="500" y="430" class="small">
+    <tspan x="500" dy="0">a site of freedom,</tspan>
+    <tspan x="500" dy="20">co-creation, joy,</tspan>
+    <tspan x="500" dy="20">and collective becoming</tspan>
+  </text>
+
+  <!-- Principles -->
+  <text x="500" y="70" class="principle">Social Imagination</text>
+  <text x="185" y="390" class="principle">Embodied Play</text>
+  <text x="815" y="390" class="principle">Radical Care</text>
+  <text x="500" y="710" class="principle">Communitas</text>
+
+  <!-- Moving dancer dots -->
+  <g>
+    <circle class="dot" cx="430" cy="485" r="6" />
+    <circle class="dot" cx="455" cy="510" r="5" />
+    <circle class="dot" cx="480" cy="470" r="6" />
+    <circle class="dot" cx="510" cy="500" r="5" />
+    <circle class="dot" cx="540" cy="460" r="6" />
+    <circle class="dot" cx="565" cy="495" r="5" />
+    <circle class="dot" cx="595" cy="475" r="6" />
+
+    <circle class="dot" cx="410" cy="430" r="5" />
+    <circle class="dot" cx="445" cy="405" r="6" />
+    <circle class="dot" cx="475" cy="435" r="5" />
+    <circle class="dot" cx="520" cy="410" r="6" />
+    <circle class="dot" cx="560" cy="435" r="5" />
+    <circle class="dot" cx="600" cy="415" r="6" />
+
+    <circle class="dot" cx="440" cy="550" r="5" />
+    <circle class="dot" cx="475" cy="570" r="6" />
+    <circle class="dot" cx="520" cy="545" r="5" />
+    <circle class="dot" cx="555" cy="570" r="6" />
+  </g>
+
+  <!-- Footer flyer-style details -->
+  <text x="120" y="735" class="small">LOCATION: EVERYWHERE / NOWHERE</text>
+  <text x="500" y="735" class="small">FREQUENCY: LOVE • CARE • FREEDOM</text>
+  <text x="850" y="735" class="small">BRING: YOUR WHOLE SELF</text>
+
+</svg>
+
+</body>
+</html>
