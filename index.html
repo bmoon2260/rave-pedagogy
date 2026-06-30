@@ -24,6 +24,12 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+
+  transition: filter 0.4s ease;
+}
+
+.flyer-bg.dimmed {
+  filter: brightness(0.55);
 }
 
 .framework-image {
@@ -34,11 +40,49 @@ body {
   width: min(55vw, 660px);
   opacity: 0;
   transition: opacity 2s ease;
-  z-index: 2;
+  z-index: 5;
 }
 
 .framework-image.visible {
   opacity: 1;
+}
+
+#danceFloor {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  transform: translate(-50%, -50%);
+  width: min(39vw, 470px);
+  height: min(39vw, 470px);
+  border-radius: 50%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.dancer {
+  position: absolute;
+  background: black;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  animation-name: drift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.dancer.visible {
+  opacity: 1;
+}
+
+@keyframes drift {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(var(--move-x), var(--move-y));
+  }
 }
 
 #enterButton {
@@ -54,12 +98,97 @@ body {
   font-size: 34px;
   font-weight: bold;
   letter-spacing: 3px;
-  z-index: 3;
+  z-index: 20;
 }
 
 #enterButton:hover {
   background: #333;
 }
+
+.hotspot {
+  position: absolute;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 15;
+}
+
+.hotspot-communitas {
+  left: 49.7%;
+  top: 79%;
+  transform: translate(-50%, -50%);
+  width: 165px;
+  height: 165px;
+  border-radius: 50%;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.hotspot:hover {
+  cursor: pointer;
+}
+
+#infoPanel {
+  position: absolute;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 320px;
+  padding: 24px;
+  background: rgba(244, 241, 238, 0.94);
+  border: 3px solid #000;
+  box-shadow: 8px 8px 0 #000;
+  z-index: 30;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+#infoPanel.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#infoPanel h2 {
+  margin: 0 0 4px 0;
+  font-size: 32px;
+}
+
+#infoPanel h3 {
+  margin: 0 0 18px 0;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.panel-kicker {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.citation {
+  font-size: 13px;
+}
+
+#closePanel {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  width: 36px;
+  height: 36px;
+
+  border: none;
+  background: transparent;
+
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+
+  z-index: 100;
+}
+
 </style>
 </head>
 
@@ -77,16 +206,87 @@ body {
     src="assets/Rave_Pedagogy_Framework_Static.svg"
     alt="Rave Pedagogy Framework">
 
+ <button class="hotspot hotspot-communitas" aria-label="Open Communitas panel"></button>
+
+  <div id="danceFloor"></div>
+
   <button id="enterButton">ENTER THE TALZ</button>
+
+  <aside id="infoPanel">
+    <button id="closePanel">×</button>
+
+    <p class="panel-kicker">Principle</p>
+
+    <h2>Communitas</h2>
+
+    <h3>Victor Turner</h3>
+
+    <p>
+      "[Communitas] is...a transformative experience that goes to the root of each person's being and finds in that root something profoundly communal and shared" (p. 138).
+    </p>
+
+    <p class="citation">
+      Turner, V. (1969). <em>The Ritual Process: Structure and Anti-Structure</em>.
+    </p>
+  </aside>
+
 </div>
 
 <script>
 const button = document.getElementById("enterButton");
 const music = document.getElementById("music");
 const framework = document.querySelector(".framework-image");
+const flyer = document.querySelector(".flyer-bg");
+
+const panel = document.getElementById("infoPanel");
+const closePanel = document.getElementById("closePanel");
 
 button.addEventListener("click", () => {
   framework.classList.add("visible");
+
+const danceFloor = document.getElementById("danceFloor");
+
+danceFloor.innerHTML = "";
+
+for (let i = 0; i < 560; i++) {
+  const dancer = document.createElement("div");
+  dancer.classList.add("dancer");
+
+  let x, y;
+
+do {
+  const angle = Math.random() * Math.PI * 2;
+  const radius = Math.sqrt(Math.random()) * 40;
+
+  x = 50 + Math.cos(angle) * radius;
+  y = 56 + Math.sin(angle) * radius;
+
+} while (
+  x < 8 || x > 92 ||
+  y < 35 ||      // hard ceiling: no dancers above this line
+  y > 88
+);
+
+  const size = 2 + Math.pow(Math.random(), 2.3) * 8;
+
+  const moveX = -10 + Math.random() * 20;
+  const moveY = -10 + Math.random() * 20;
+
+  dancer.style.left = `${x}%`;
+  dancer.style.top = `${y}%`;
+  dancer.style.width = `${size}px`;
+  dancer.style.height = `${size}px`;
+  dancer.style.animationDuration = `${0.35 + Math.random() * 0.8}s`;
+  dancer.style.animationDelay = `${Math.random() * 1.5}s`;
+  dancer.style.setProperty("--move-x", `${moveX}px`);
+  dancer.style.setProperty("--move-y", `${moveY}px`);
+
+  danceFloor.appendChild(dancer);
+
+  setTimeout(() => {
+    dancer.classList.add("visible");
+  }, i * 8);
+}
 
   music.volume = 0;
   music.play();
@@ -104,10 +304,24 @@ button.addEventListener("click", () => {
   button.style.opacity = "0";
   button.style.transition = "opacity 1s ease";
 
-  setTimeout(() => {
+   setTimeout(() => {
     button.style.display = "none";
   }, 1000);
+
 });
+
+const communitasHotspot = document.querySelector(".hotspot-communitas");
+
+communitasHotspot.addEventListener("click", () => {
+  panel.classList.add("visible");
+  flyer.classList.add("dimmed");
+});
+
+closePanel.addEventListener("click", () => {
+  panel.classList.remove("visible");
+  flyer.classList.remove("dimmed");
+});
+
 </script>
 
 </body>
